@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ChatController;
+use App\Models\ChatMessage;
+use App\Models\ChatRoom;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/chat', function () {
     return Inertia::render('Chat/container');
 })->name('chat');
 
-Route::middleware('auth::sanctum')->get('/chat/rooms', [ChatController::class, 'rooms']);
-Route::middleware('auth::sanctum')->get('/chat/room/{chat_room}/messages', [ChatController::class, 'messages']);
-Route::middleware('auth::sanctum')->post('/chat/room/{chat_room}/message', [ChatController::class, 'newMessage']);
+Route::middleware('auth:sanctum')->get('/chat/rooms', [ChatController::class, 'rooms']);
+Route::middleware('auth:sanctum')->get('/chat/room/{chat_room}/messages', [ChatController::class, 'messages']);
+Route::middleware('auth:sanctum')->post('/chat/room/{chat_room}/message', [ChatController::class, 'newMessage']);
 
